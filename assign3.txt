@@ -5,35 +5,50 @@ Read the following to understand the parent & child process concept.
 
 •	Process state Diagram
 =>	States of a process are as following:
-		New (Create) – In this step, the process is about to be created but not yet created, it is the program which is present in 				secondary memory that will be picked up by OS to create the process.
+		New (Create) – In this step, the process is about to be created but not yet created, it is the program which is present in 
+		secondary memory that will be picked up by OS to create the process.
 		
 		Ready – New -> Ready to run. After the creation of a process, the process enters the ready state i.e. the process is loaded into 				the main memory. The process here is ready to run and is waiting to get the CPU time for its execution.
 		
-		Run – The process is chosen by CPU for execution and the instructions within the process are executed by any one of the 			available CPU cores.
+		Run – The process is chosen by CPU for execution and the instructions within the process are executed by any one of the 
+		available CPU cores.
 
-		Blocked or wait – Whenever the process requests access to I/O or needs input from the user or needs access to a critical 			region(the lock for which is already acquired) it enters the blocked or wait state. Once the I/O operation is 			completed the process goes to the ready state.
+		Blocked or wait – Whenever the process requests access to I/O or needs input from the user or needs access to a critical 	
+		region(the lock for which is already acquired) it enters the blocked or wait state. Once the I/O operation is 		
+		completed the process goes to the ready state.
 
 		Terminated or completed – Process is killed as well as PCB is deleted.
 
-		Suspend ready – Process that was initially in the ready state but were swapped out of main memory(refer Virtual Memory  				topic) and placed onto external storage by scheduler are said to be in suspend ready state.
+		Suspend ready – Process that was initially in the ready state but were swapped out of main memory(refer Virtual Memory  
+		topic) and placed onto external storage by scheduler are said to be in suspend ready state.
 
-		Suspend wait or suspend blocked – Similar to suspend ready but uses the process which was performing I/O operation and lack 				of main memory caused them to move to secondary memory.
+		Suspend wait or suspend blocked – Similar to suspend ready but uses the process which was performing I/O operation and lack 
+		of main memory caused them to move to secondary memory.
 
 ===============================================================================================================================
 		
 •	The parent & child process concept
-		Parent Process : All the processes in operating system are created when a process executes the fork() system call except the 				startup process. The process that used the fork() system call is the parent process.
-		Child Process : A child process is a process created by a parent process in operating system using a fork() system call. A child 				process may also be called a subprocess or a subtask.
-		=>Fork system call is used for creating a new process, which is called child process, which runs concurrently with the process 			that makes the fork() call (parent process). After a new child process is created, both processes will execute the next 		instruction following the fork() system call. A child process uses the same pc(program counter), same CPU registers, same open 		files which use in the parent process.
+		Parent Process : All the processes in operating system are created when a process executes the fork() system call except the 		
+		startup process. The process that used the fork() system call is the parent process.
+		Child Process : A child process is a process created by a parent process in operating system using a fork() system call. A child 
+		process may also be called a subprocess or a subtask.
+		=>Fork system call is used for creating a new process, which is called child process, which runs concurrently with the process 	
+		that makes the fork() call (parent process). After a new child process is created, both processes will execute the next 		
+		instruction following the fork() system call. A child process uses the same pc(program counter), same CPU registers, same open 		
+		files which use in the parent process.
 
 ===============================================================================================================================
 
 •	Understand orphan processes
-		A process whose parent process no more exists i.e. either finished or terminated without waiting for its child process to 				terminate is called an orphan process. In the following code, parent finishes execution and exits while the child process is still 		executing and is called an orphan process now.
+		A process whose parent process no more exists i.e. either finished or terminated without waiting for its child process to 
+		terminate is called an orphan process. In the following code, parent finishes execution and exits while the child process is still 
+		executing and is called an orphan process now.
 
 ===============================================================================================================================		
 •	Understand zombie processes
-		A process which has finished the execution but still has entry in the process table to report to its parent process is known as a 		zombie process. A child process always first becomes a zombie before being removed from the process table. The parent 		process reads the exit status of the child process which reaps off the child process entry from the process table
+		A process which has finished the execution but still has entry in the process table to report to its parent process is known as a 
+		zombie process. A child process always first becomes a zombie before being removed from the process table. The parent 		
+		process reads the exit status of the child process which reaps off the child process entry from the process table
 		
 ===============================================================================================================================
 
@@ -72,6 +87,92 @@ cout<<"this is child process:"<<getpid();
 if (pid >0)
 { cout<<"this is parent process:"<<getpid(); }
 else { cout<<"process is not created"; } } 
+
+==========================================================================================================================================
+1.	Parent and child process 
+Write a C/CPP program to create a child process. Child should print its pid and its parent’s pid and should exit by printing message as “Child Exiting …”. Parent should print its pid and should exit by printing message as “Parent Exiting ..”. 
+(Hint(functions to be used) : getpid, fork, getppid) 
+
+
+#include <iostream>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+using namespace std; 
+int main() { 
+	pid_t pid; 
+	cout << "Before fork!!!!!" << endl;
+	pid = fork(); 
+	if(pid==0) { 
+		cout <<"this is child process:" << getpid() <<"  " << getppid() <<  endl; 
+		execv("/bin/date", "date", NULL);
+		cout << endl << "-----------------------" << endl;		
+		exit(0);
+	exit(0); 
+
+	}
+ else if(pid>0) { 
+		cout << "this is parent process:" << getpid()<< "  "  << getppid() << endl; 
+		execl("/bin/date", "date", NULL);
+		exit(0);
+	}
+else { 
+		cout << "process is not created" << endl; 
+	} 
+exit(0);
+return 0;
+}
+
+=========================================================================================================================================
+
+2.	Scheduling functions 
+Write a program in C/CPP to check the scheduling policy used by the process and its priority. 
+	(Hint(functions to be used) : sched_getscheduler, getpid) 
+
+#include <iostream>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sched.h>
+
+using namespace std;
+int main()
+{
+    pid_t pid;
+    cout << "Before fork!!!!!" << endl;
+    pid = fork();
+    if (pid == 0)
+    {
+        // cout << pid << endl;
+        cout << "This is child process. Process ID: " << getpid() << "  "
+<< "Parent ID: " << getppid() << "  "
+<< "Scheduling Policy Status: "
+<< sched_getscheduler(pid) << endl;
+
+        // execl("/bin/date", "date", NULL);
+        cout << endl
+<< "-----------------------------" << endl;
+        exit(0);
+    }
+    else if (pid > 0)
+    {
+        //  cout << pid << endl;
+        cout << "this is parent process:" << getpid() << "  "
+<< "Parent ID: " << getppid() << "  "
+<< "Scheduling Policy Status: "
+<< sched_getscheduler(pid) << endl;
+        // execl("/bin/date", "date", NULL);
+        exit(0);
+    }
+    else
+    {
+        cout << "process is not created" << endl;
+    }
+    exit(0);
+    return 0;
+}
+
+==============================================================================================================================
 
 
 Q4 	Scheduling algorithm 

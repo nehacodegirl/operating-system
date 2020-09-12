@@ -1,0 +1,55 @@
+						Assignment-3
+
+
+Read the following to understand the parent & child process concept.
+
+•	Process state Diagram
+=>	States of a process are as following:
+		New (Create) – In this step, the process is about to be created but not yet created, it is the program which is present in 				secondary memory that will be picked up by OS to create the process.
+		
+		Ready – New -> Ready to run. After the creation of a process, the process enters the ready state i.e. the process is loaded into 				the main memory. The process here is ready to run and is waiting to get the CPU time for its execution.
+		
+		Run – The process is chosen by CPU for execution and the instructions within the process are executed by any one of the 			available CPU cores.
+
+		Blocked or wait – Whenever the process requests access to I/O or needs input from the user or needs access to a critical 			region(the lock for which is already acquired) it enters the blocked or wait state. Once the I/O operation is 			completed the process goes to the ready state.
+
+		Terminated or completed – Process is killed as well as PCB is deleted.
+
+		Suspend ready – Process that was initially in the ready state but were swapped out of main memory(refer Virtual Memory  				topic) and placed onto external storage by scheduler are said to be in suspend ready state.
+
+		Suspend wait or suspend blocked – Similar to suspend ready but uses the process which was performing I/O operation and lack 				of main memory caused them to move to secondary memory.
+
+===============================================================================================================================
+		
+•	The parent & child process concept
+		Parent Process : All the processes in operating system are created when a process executes the fork() system call except the 				startup process. The process that used the fork() system call is the parent process.
+		Child Process : A child process is a process created by a parent process in operating system using a fork() system call. A child 				process may also be called a subprocess or a subtask.
+		=>Fork system call is used for creating a new process, which is called child process, which runs concurrently with the process 			that makes the fork() call (parent process). After a new child process is created, both processes will execute the next 		instruction following the fork() system call. A child process uses the same pc(program counter), same CPU registers, same open 		files which use in the parent process.
+
+===============================================================================================================================
+
+•	Understand orphan processes
+		A process whose parent process no more exists i.e. either finished or terminated without waiting for its child process to 				terminate is called an orphan process. In the following code, parent finishes execution and exits while the child process is still 		executing and is called an orphan process now.
+
+===============================================================================================================================		
+•	Understand zombie processes
+		A process which has finished the execution but still has entry in the process table to report to its parent process is known as a 		zombie process. A child process always first becomes a zombie before being removed from the process table. The parent 		process reads the exit status of the child process which reaps off the child process entry from the process table
+		
+===============================================================================================================================
+
+•	what is getpid() and how to use it..??
+		
+•	what is getppid() and how to use it..??
+•	what is fork()? what happens when you use fork() in your program..??
+•	what is wait() / waitpid() and how to use it..??
+•	what are zombie processes? when they will get created.? How to kill the zombie processes..?
+•	what are orphan processes? when they will get created.?
+•	what is user space?
+•	what is kernel space / system space? 
+•	What is IPC(inter process communication) and what is the need of it.
+•	what is Unnamed PIPE? how to create it? When we need this??
+•	what is named PIPE? how to create it? When we need this??
+•	What is the difference between Unnamed PIPE and named PIPE?
+•	what are execl,exec,execv and difference between them..?? 
+•	what is semaphore? Explore sem_init(), sem_create(), sem_destroy(), sem_unlink(), sem_wait(), sem_post().
+•	what is mutex? Difference between semaphore and mutex.

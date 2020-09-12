@@ -57,6 +57,21 @@ Read the following to understand the parent & child process concept.
 
 ====================================================================================================================================
 
+Q1 Q Write a C/CPP program to create a child process. Child should print its pid and its parent’s pid and should exit by printing message as “Child Exiting …”. Parent should print its pid and should exit by printing message as “Parent Exiting ..”.
+
+#include<iostream>
+#include<sys/types.h>
+#include<unistd.h>  
+using namespace std;  
+int main(){
+pid_t pid;
+pid=fork();
+if (pid==0){
+cout<<"this is child process:"<<getpid();  
+} else 
+if (pid >0)
+{ cout<<"this is parent process:"<<getpid(); }
+else { cout<<"process is not created"; } } 
 
 
 Q4 	Scheduling algorithm 

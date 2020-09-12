@@ -1,132 +1,668 @@
-Q1. Explore the following commands with various options, refer man pages for 
-    further help a) date b) cal c) bc d) echo e) who f) whoami g) logname g) uname h)
-    seq i) clear
-Ans –  a) date 
-                           - Mon Sep  7 22:22:46 IST 2020
-	b)cal
-		September 2020
-Su Mo Tu We Th Fr Sa
-       1  2  3  4  5
- 6  7  8  9 10 11 12
-13 14 15 16 17 18 19
-20 21 22 23 24 25 26
-27 28 29 30
+head -20
 
-	c)bc
-		echo 4*5 | bc
-                           20
-	d)echo
-		echo -it just to print the line or input
-	e)who
-		
-	f) who am i
-		-it gives the username
-	g)log name
-		- it shows the login name
-	h) uname
-		- it gives the basic info about hardware and software
-	i)seq 
-		-seq 5 10
-		It gives the sequence from 5 to 10 including 5 and 10.
-	j)clear  - it clear the screen
+sed -n 12,22p print line 12 to 22 from txt
+
+tail -c -20  tail
+
+tr -s ' '  trim double space
+
+sort -r -g  reverse number
+
+sort -t $'\t' -k 2,2 -r -n  sort according to 2nd column
+
+uniq -u  display only unique 
+
+a=($(cat))
+echo ${a[@]}   display array
+
+a=($(cat))
+echo ${a[@]:3:5}  display split 
+
+a=($(cat))
+echo ${a[@]/*[aA]*/}
+
+Q1.  Explore the following commands with various options, refer man pages for 
+       further help 
+    a). date
+   1.  $ date
+       Mon Sep  7 20:27:07 IST 2020
+    2. date +%a
+       Mon
+    3.date +%A
+       Monday
+   4. date +%b
+       Sep
+   5. date +%B
+       September
+   6. date +%d
+       07
+   7. date +%D
+       09/07/20
+    8. date +%F
+       2020-09-07
+    9. date +%T
+       20:32:26
+    10. date +%Y
+       2020    
+    11. date +%B' '%d' '%Y' '%T 
+          September 07 2020 20:34:29   
+   
+   12. date --date="yesterday"
+         Sun Sep  6 20:35:42 IST 2020
+   
+   13.date --date="2 year ago"
+         Fri Sep  7 20:36:49 IST 2018
+
+    14. date --date="5 sec ago"
+          Mon Sep  7 20:42:15 IST 2020
+
+     15.date --date="2 month ago"
+          Tue Jul  7 20:42:44 IST 2020
+
+     16.date --date="10 day ago"
+          Fri Aug 28 20:43:23 IST 2020
+
+     17.date --date="next tue"(Date and time of upcoming particular week day)
+         Tue Sep  8 00:00:00 IST 2020
+
+     18.date --date="2 day"(date time after two days)
+          Wed Sep  9 20:44:16 IST 2020
+
+     19.$date --date="1 year" (Date and time after 1 year on the current day)
+          Tue Sep  7 20:44:38 IST 2021
+
+      20.$date --set="date to be set" (:-s or –set Option: To set the system date and time -s or –set  option is used.)
+===============================================================================================================================  
+ b). cal 
+     ->  cal command is a calendar command in Linux which is used to see the calendar of a specific month or a whole year.
+      	cal :( Shows current month calendar on the terminal.)
+		 $ cal
+	cal 08 2000 : (Shows calendar of selected month and year.)
+		~$ cal 07 2018
+	cal 2018 : (Shows the whole calendar of the year.)
+		 $ cal 2017
+	cal -3 :( Shows calendar of previous, current and next month)
+                 		$ cal -3
+	cal 2020 -m1 : (show calender of jan month of 2020)
+		$cal 2020 -m1
+===============================================================================================================================
+ c) bc 
+      ->Linux or Unix operating system provides the bc command and expr command for doing arithmetic calculations.
+      ->bc command is used for command line calculator. It is similar to basic calculator by using which we can do basic mathematical calculations.
+	$ echo "12+5"  | bc
+		17
+	$echo "10^5"  | bc
+		100000
+	echo "var=10;var^=2;var" |bc
+		100
+	$ x=`echo "var=500;var%=7;var" | bc`
+	$ echo $x
+		3
+	$ echo "var=10;++var" | bc
+		11
+	$ echo "var=10;var" | bc
+		10
+	 $ echo "10>5" | bc (if condition is true then output will be 1)
+		1 (true)
+	$ echo "1==2" | bc (if condition is false then output will be 0)
+		0 (false)
+	$ echo "10 && 5" | bc
+		1
+
+	$ echo "0 || 0" | bc
+		0
+
+	$ echo "! 0" | bc
+		1
+	$ echo 'n=8;m=10;
+		if(n>m) 
+		print "n is greater" 
+			else 
+		print "m is greater" ' | bc -l
+	     output: m is greater
+	
+	$ echo "for(i=1; i<=10; i++) 
+		{
+		i;
+		}" | bc    
+	     output:  1 2 3 4 5 6 7 8 9 10
+===============================================================================================================================
+d) echo 
+	->echo command in linux is used to display line of text/string that are passed as an argument .
+	$ echo "Geeks for Geeks"
+		Geeks for Geeks
+	$echo -e "Geeks \bfor \bGeeks"
+		GeeksforGeeks
+	~$ echo -e "i m os \ci m linux"
+		i m os
+	$ echo -e "i m os \ni m linux \ni m amrita"
+		i m os
+		i m linux
+		i m amrita
+	$ echo -e "i m os \ti m linux \ti m amrita"
+		i m os  i m linux       i m amrita
+	$ echo -e "Geeks \rfor Geeks"
+		for Geeks
+	$echo * ( this command will print all files/folders, similar to ls command .)
+		city
+	$ echo -n "Geeks for Geeks"(this option is used to omit echoing trailing newline .)
+=============================================================================================================================== 
+  e) who 
+	->The who command is used to get information about currently logged in user on to system.
+===============================================================================================================================	
+    f) whoami 
+	->whoami command is used both in Unix Operating System and as well as in Windows Operating System.
+	$ whoami
+		cdacunix
+	1. –help (It gives the help message and exit.)
+ 		$whoami --help
+	2. –version ( It gives the version information and exit.)
+		$whoami --version
+	
+===============================================================================================================================
+    g) logname
+	->the logname command lets you know the login name of the current (or calling) user.
+===============================================================================================================================
+    h) uname 
+	->The command ‘uname‘ displays the information about the system.
+	$ uname
+                      Linux
+ 	1. uname -a : It prints all the system information in the following order: Kernel name, network node hostname, kernel release date, 		                                         kernel version, machine hardware name, hardware platform, operating system
+		$ uname -a
+		Linux DESKTOP-T3JUF59 4.4.0-18362-Microsoft #1-Microsoft Mon Mar 18 12:02:00 PST 2019 x86_64 x86_64 		x86_64 GNU/Linux
+	2. -s : It prints the kernel name.
+		$uname -s
+		Linux
+	3. -n : It prints the hostname of the network node(current computer).
+		$uname -n
+		DESKTOP-T3JUF59
+	4. -r : It prints the kernel release date.
+		$uname -r
+		4.4.0-18362-Microsoft
+	5. -v: It prints the version of the current kernel.
+		$uname -v
+                                    #1-Microsoft Mon Mar 18 12:02:00 PST 2019
+===============================================================================================================================
+ i) seq 
+	->seq command in Linux is used to generate numbers from FIRST to LAST in steps of INCREMENT. It is a very useful command where we 	had to generate list of numbers in while, for, until loop.
+	$ seq 5 2 20
+5
+7
+9
+11
+13
+15
+17
+19
+	seq LAST : When only one argument is given then it produces numbers from 1 to LAST in step increment of 1. If the LAST is less than 1, 		then is produces no output
+
+	          	$seq 10
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+	seq FIRST LAST : When two arguments are given then it produces numbers from FIRST till LAST is step increment of 1. If LAST is less than 		            FIRST, then it produces no output     
+		$ seq 2 11
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+	seq FIRST INCREMENT LAST : When three arguments are given then it produces numbers from FIRST till LAST in step of INCREMENT. If                                                                     LAST is less than FIRST, then it produces no output.          
+		$ seq 2 2 20
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+	seq -f “FORMAT” FIRST INCREMENT LAST : This command is used to generate sequence in a formated manner. FIRST and INCREMENT are                                                                                            optional.
+	$seq -f "GST%2g" 4
+GST 1
+GST 2
+GST 3
+GST 4
+	seq -s “STRING” FIRST INCREMENT LAST : This command is uses to STRING to seprate numbers. By default this value is equal to "\n".                                                                                           FIRST and INCREMENT are optional.     
+	$ seq -s " " 4
+1 2 3 4
+
+===============================================================================================================================
+    j) clear
+	->clear the terminal screen.
+
+===============================================================================================================================
 
 Q2.	A) Create three directory a b and c and create a.txt,b.txt and c.txt
 		in each directory respectively and then copy c directory into the a.
-		-mkdir a b c
-		- cd a
-		- cat > a.txt
-		- cd b
-		- cat >b.txt
-		- cd c
-		- cat > c.txt 
-	B)Move Directory b to c.
-		- mv b c
-	C)Create alias of ls -lh command to your name.
-
-	D)Change Directory name a to cdac.
-			- mkdir cdac
-			- mv a cdac
-
-
-Q3. A) Create five files file1.txt , file2.txt ,file3.txt file4.txt and
-    file5.txt with some text inside it. Search for 's' character
-    inside all the files using grep command.
--	grep ‘s’ file1.txt file2.txt file3.txt,file4.txt,file5.txt 
-
-
-    Also Use cat to view all file content together.
-	B)Create file.txt using cat and edit that using nano editor.
-	c)Create 5 empty files using touch command
-		
-	D)Remove previously created directory a , b and c.
-- rm a b c -rf
-
+	$mkdir a
+	$mkdir b
+	$mkdir c
 	
+	$cd a
+	$cat a.txt
+
+	$cd b
+	$cat b.txt
+	
+	$cd c
+	$cat c.txt
+
+	$cp b c
+	
+	B)Move Directory b to c.
+	$ mv b c
+	
+	C)Create alias of ls -lh command to your name.
+	  $alias amrita='ls -lh'
+	  $ amrita
+	
+	D)Change Directory name a to cdac.
+	$ mv c cdac
+===============================================================================================================================
+
+Q3. A) Create five files file1.txt , file2.txt ,file3.txt file4.txt and file5.txt with some text inside it. Search for 's' character inside all the files using                     grep command. Also Use cat to view all file content together.
+	$ cat >file1.txt
+	i m file1
+	$ cat >file2.txt
+	i m file2
+	$ cat >file3.txt
+	i m file3
+	$ cat >file4.txt
+	i m file4
+	$ cat >file5.txt
+	i m file5
+              
+	$ grep 'm' file1 file2 file3 file4 file5
+	file1:i m file1
+	file2:i m file2
+	file3:i m file3
+	file4:i m file4
+	file5:i m file5
+	
+B)Create file.txt using cat and edit that using nano editor.
+	$ cat >file
+	i m file
+
+	$ cat file
+	i m file
+
+	$ vi file
+	$ cat file
+	i m file .i m using vi editor to change the file content.
+	
+C)Create 5 empty files using touch command.
+	$ touch f1.txt
+	$ touch f2.txt
+	$ touch f3.txt
+	$ touch f4.txt
+	$ touch f5.txt
+
+	D)Remove previously created directory a , b and c.
+	$rm -r a
+	$rm -r b
+	$rm -r c
+	
+===============================================================================================================================
+
 Q4. Create a file with some content using vi editor
-	- vi city
-	mumbai
-	delhi
-	chennai
-	banglore
-	pune
-	indore
-	aurangabad
-	akola
-	nashik
-a)	Display the file using cat command
-- cat city
-	b) Display line numbers along with content
-		- nl city
-	c) Display the file in reverse order using tac
-		- tac city
-	d) Combine multiple files using cat command
-		- cat city fruits
+	 $ cat >file4using_vi
+	$ vi file4using_vi
+
+a) Display the file using cat command
+	$ cat file4using_vi
+	hello linux vi editor , I am amrita tiwari.
+
+b) Display line numbers along with content
+	$ cat -n file4using_vi
+     		 1  hello linux vi editor , I am amrita tiwari.
+    		 2  Cat Command Display Line Numbers.
+c) Display the file in reverse order using tac
+	$ tac file4using_vi
+		Cat Command Display Line Numbers.
+		hello linux vi editor , I am amrita tiwari.
+d) Combine multiple files using cat command
+	cat file1.txt file2.txt file3.txt file4.txt > file5.txt
+	$ cat file5.txt
+		i m file1
+		i m file2
+		i m file3
+		i m file4
+===============================================================================================================================
 
 Q5. Create Random some files and sub directories.
-	a) display files row wise, column wise, 1 per row
-	b) sort the files in ascending, descending order
-	c) Create some hidden files and sub directories and display them using “ls -a”
-	d) Change time stamp of some files and directories using touch command and display the files using ls -t ls -rt
-	e) Recursive display contents of your home directory.
-	f) display all attributes of files and directories using ls -l
-	g) display attributes of a directory using ls -ld
 
+a) display files row wise, column wise, 1 per row
+row wise
+--------------
+$ cat file1.txt file2.txt file3.txt file4.txt
+i m file1
+i m file2
+i m file3
+i m file4
 
+column wise
+------------------
+$ column file1.txt file2.txt file3.txt file4.txt
+i m file1       i m file2       i m file3       i m file4
+
+b) sort the files in ascending, descending order
+$ cat fruit
+apple
+mango
+papaya
+orange
+banana
+kiwi
+pinaple
+water millon
+millon
+graps
+curmberry
+
+$ sort fruit
+apple
+banana
+curmberry
+graps
+kiwi
+mango
+millon
+orange
+papaya
+pinaple
+srawberry
+water millon
+srawberry
+
+c) Create some hidden files and sub directories and display them using “ls -a”
+	$ mv fruit.txt .fruit.txt
+	$ls -a
+
+d) Change time stamp of some files and directories using touch command and display the files using ls -t ls -rt.
+	$ touch text1.txt
+
+	$ ls -l text1.txt
+	-rw-rw-rw- 1 cdacunix cdacunix 0 Sep  8 23:46 text1.txt
+	
+	$ touch -d 'sep 9 22:00' text1.txt
+	$ ls -l text1.txt
+	-rw-rw-rw- 1 cdacunix cdacunix 0 Sep  9  2020 text1.txt
+
+	$ ls -t
+	text1.txt  file4using_vi  f4.txt  f2.txt  file   file4  file2  file.txt   file3.txt  file1.txt  shell-if111.sh  shell-if1.sh  city
+	file5.txt  f5.txt         f3.txt  f1.txt  file5  file3  file1  file4.txt  file2.txt  cdac       shell-if11.sh   shell-if.sh
+
+	$ ls -rt
+	city         shell-if1.sh   shell-if111.sh  file1.txt  file3.txt  file.txt  file2  file4  file    f2.txt  f4.txt  file4using_vi  text1.txt
+	shell-if.sh  shell-if11.sh  cdac            file2.txt  file4.txt  file1     file3  file5  f1.txt  f3.txt  f5.txt  file5.txt
+
+e) Recursive display contents of your home directory.
+	$ls -R
+
+f) display all attributes of files and directories using ls -l
+	$ ls -l
+total 0
+drwxrwxrwx 1 cdacunix cdacunix 4096 Sep  8 17:29 cdac
+-rwxrwxrwx 1 cdacunix cdacunix   36 Sep  7 12:49 city
+-rw-rw-rw- 1 cdacunix cdacunix    0 Sep  8 22:16 f1.txt
+-rw-rw-rw- 1 cdacunix cdacunix    0 Sep  8 22:16 f2.txt
+-rw-rw-rw- 1 cdacunix cdacunix    0 Sep  8 22:16 f3.txt
+-rw-rw-rw- 1 cdacunix cdacunix    0 Sep  8 22:16 f4.txt
+-rw-rw-rw- 1 cdacunix cdacunix    0 Sep  8 22:16 f5.txt
+-rw-rw-rw- 1 cdacunix cdacunix   59 Sep  8 22:07 file
+-rwxrwxrwx 1 cdacunix cdacunix   11 Sep  8 18:39 file.txt
+-rw-rw-rw- 1 cdacunix cdacunix   10 Sep  8 18:53 file1
+-rwxrwxrwx 1 cdacunix cdacunix   10 Sep  8 18:07 file1.txt
+-rw-rw-rw- 1 cdacunix cdacunix   10 Sep  8 22:05 file2
+-rwxrwxrwx 1 cdacunix cdacunix   10 Sep  8 18:07 file2.txt
+-rw-rw-rw- 1 cdacunix cdacunix   10 Sep  8 22:05 file3
+-rwxrwxrwx 1 cdacunix cdacunix   10 Sep  8 18:07 file3.txt
+-rw-rw-rw- 1 cdacunix cdacunix   10 Sep  8 22:06 file4
+-rwxrwxrwx 1 cdacunix cdacunix   10 Sep  8 18:07 file4.txt
+-rw-rw-rw- 1 cdacunix cdacunix   78 Sep  8 22:32 file4using_vi
+-rw-rw-rw- 1 cdacunix cdacunix   10 Sep  8 22:06 file5
+-rwxrwxrwx 1 cdacunix cdacunix   10 Sep  8 23:08 file5.txt
+-rwxrwxrwx 1 cdacunix cdacunix   15 Sep  8 11:50 shell-if.sh
+-rwxrwxrwx 1 cdacunix cdacunix   15 Sep  8 12:41 shell-if1.sh
+-rwxrwxrwx 1 cdacunix cdacunix   15 Sep  8 12:52 shell-if11.sh
+-rwxrwxrwx 1 cdacunix cdacunix   24 Sep  8 13:01 shell-if111.sh
+-rw-rw-rw- 1 cdacunix cdacunix    0 Sep  9  2020 text1.txt
+	
+
+g) display attributes of a directory using ls -ld
+	$ls -Id
+	cdac  f1.txt  f3.txt  f5.txt  file.txt  file1.txt  file2.txt  file3.txt  file4.txt      file5      shell-if.sh   shell-if11.sh   text1.txt
+ 	city  f2.txt  f4.txt  file    file1     file2      file3      file4      file4using_vi  file5.txt  shell-if1.sh  shell-if111.sh
+
+===============================================================================================================================
 
 Q1. Create directory of your name and then create 4 files inside it named
-	a.txt, b.txt, c.txt and d.sh. And change the directory permission to
+        a.txt, b.txt, c.txt and d.sh. And change the directory permission to
 	only user and also files permission to only user such that
-- 	mkdir neha
-- 	cd neha 
--	touch a.txt b.txt c.txt d.sh
--	 chmod 700 neha
--	 ls -l neha
-		a)user can read and write the file a.txt and b.txt
-		-	chomd 600 a.txt b.txt
-		b)user can write the file c.txt
-		-	chmod  400 c.txt
-		c)user can exectuable the file d.sh. Make
-			Contents of file d.sh:
+		
+			~/amrita$ chmod 700 *
+-rwx------ 1 cdacunix cdacunix 0 Sep  9 00:19 a.txt
+-rwx------ 1 cdacunix cdacunix 0 Sep  9 00:19 b.txt
+-rwx------ 1 cdacunix cdacunix 0 Sep  9 00:20 c.txt
+-rwx------ 1 cdacunix cdacunix 0 Sep  9 00:20 d.sh
+
+
+a)user can read and write the file a.txt and b.txt
+		~/amrita$ chmod 600 a.txt b.txt
+-rw------- 1 cdacunix cdacunix 0 Sep  9 00:19 a.txt
+-rw------- 1 cdacunix cdacunix 0 Sep  9 00:19 b.txt
+-rwx------ 1 cdacunix cdacunix 0 Sep  9 00:20 c.txt
+-rwx------ 1 cdacunix cdacunix 0 Sep  9 00:20 d.sh
+					
+b)user can write the file c.txt
+		~/amrita$ chmod 200 c.txt
+-rw------- 1 cdacunix cdacunix 0 Sep  9 00:19 a.txt
+-rw------- 1 cdacunix cdacunix 0 Sep  9 00:19 b.txt
+--w------- 1 cdacunix cdacunix 0 Sep  9 00:20 c.txt
+-rwx------ 1 cdacunix cdacunix 0 Sep  9 00:20 d.sh
+
+c)user can exectuable the file d.sh. Make
+		Contents of file d.sh:
 			#/bin/sh
 			ls -lh
--	 Chmod 100 d.sh
-
+		~/amrita$ chmod 100 d.sh
+$ ls -l
+-rw------- 1 cdacunix cdacunix  0 Sep  9 00:19 a.txt
+-rw------- 1 cdacunix cdacunix  0 Sep  9 00:19 b.txt
+--w------- 1 cdacunix cdacunix  0 Sep  9 00:20 c.txt
+---x------ 1 cdacunix cdacunix 42 Sep  9 01:14 d.sh
+	
 Q2. Change the permission of the previous directory to executable only.
 	Analyze the output.
--	    chmod 100 neha
--	    ls  -lh
+
+		~/amrita$ chmod 111 *
+cdacunix@DESKTOP-T3JUF59:~/amrita$ ls -l
+---x--x--x 1 cdacunix cdacunix  0 Sep  9 00:19 a.txt
+---x--x--x 1 cdacunix cdacunix  0 Sep  9 00:19 b.txt
+---x--x--x 1 cdacunix cdacunix  0 Sep  9 00:20 c.txt
+---x--x--x 1 cdacunix cdacunix 42 Sep  9 01:14 d.sh
 
 Q3. Change the permission of the previous directory to read only.
 	Analyze the output.
--	chmod 400 neha 
+		:~/amrita$ chmod 444 *
+cdacunix@DESKTOP-T3JUF59:~/amrita$ ls -l
+-r--r--r-- 1 cdacunix cdacunix  0 Sep  9 00:19 a.txt
+-r--r--r-- 1 cdacunix cdacunix  0 Sep  9 00:19 b.txt
+-r--r--r-- 1 cdacunix cdacunix  0 Sep  9 00:20 c.txt
+-r--r--r-- 1 cdacunix cdacunix 42 Sep  9 01:14 d.sh
 
 Q4. Use echo to list the all files of your home directory.
--	echo *
+	~/amrita$ echo *
 Q5. Use echo to list the all files of /etc/ directory
--	
 Q6. Use echo to list the all files of /etc/ directory with extension name .conf
 Q7. Use echo to append your name to a.txt
+	$ echo 'amrita'>>a.txt
+	$ cat>>a.txt
+	a
 
+==================================================================================
 
+Note:Many operation might not work.Analyze them
+
+1.Create Three level nested directory a,b and c
+	$ mkdir -p a/b/c
+
+a)Create at least one hidden file in each directory
+	~/a$ cat >afile.txt   (create file inside a)
+ 	I m hidden file inside dirctory a
+	~/a$ mv .afile.txt afile.txt    (hide the file)
+
+	~/a/b$ cat >bfile.txt
+                   I m file hidden inside directory b
+	~/a/b$ mv .bfile.txt bfile.txt    (hide the file)
+
+	~/a/b/c$ cat >cfile.txt
+	i m hidden file inside directory c
+	~/a/b/c$ mv .cfile.txt cfile.txt
 	
+b)Create at least one normal text file in each directory
+	~/a$ cat >aafile.txt
+ 	I m normal file inside directory a
 
+	~/a/b$ cat >bbfile.txt
+ 	I m normal file inside directory b
+
+	~/a/b/c$ cat >ccfile.txt
+	I m normal file inside directory c
+
+c)Copy c into a
+	~$ cp -R a/b/c  a
+
+d)Copy file inside a into b
+	$ cp a/aafile.txt b
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.	Change the third level directory c permission to read only
+	      	~/a/b/c$ chmod 444 *
+		$ ls -l
+		total 0
+		-r--r--r-- 1 cdacunix cdacunix 35 Sep  9 10:17 ccfile.txt
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3.	Try copying third level c directory to outside of a
+		~$ cp -r a/b/c /home/cdacunix
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4.	Create the directory  “data“ inside b
+		~/a/b$ mkdir data
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5.	Change the permission of b to read and write only
+		~/a/b$ chmod 666 *
+		~/a/b$ ls -l
+		total 0
+		-rw-rw-rw- 1 cdacunix cdacunix   35 Sep  9 10:16 bbfile.txt
+		drw-rw-rw- 1 cdacunix cdacunix 4096 Sep  9 10:16 c
+		drw-rw-rw- 1 cdacunix cdacunix 4096 Sep  9 10:49 data
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+6.	Create directory “data2”  inside b
+		~/a/b$ mkdir data2
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+7.	Create data.txt file inside b
+		:~/a/b$ cat >data.txt
+		I m data file inside directory b
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+8.	Rename the second level directory c to copied_dir
+		:~$ mv a/b/c a/b/copied_dir
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+9.	Change permission of copied_dir to only executable
+		~/a/b$ chmod '111' copied_dir
+		~/a/b$ ls -l
+		d--x--x--x 1 cdacunix cdacunix 4096 Sep  9 10:16 copied_dir
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+10.	Try ls on copied_dir
+		~/a/b/copied_dir$ ls
+		ls: cannot open directory '.': Permission denied
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+11.	Try moving copied_dir to outside of a
+		~$ mv a/b/copied_dir /home/cdacunix
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+12.	Try moving data directory outside of a
+		~$ mv a/b/data /home/cdacunix
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+13.	Now change the owner of the directory a to root
+		~$ chown cdacunix a
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+14.	Change permission of a to read write and executable to only user
+		~/a$ chmod 700 *
+		~/a$ ls -l
+		drwx------ 1 cdacunix cdacunix 4096 Sep  9 11:19  a
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+15.	Try creating directory sample inside a
+		~/a$ mkdir sample
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+16.	Create directory x outside a
+		$ mkdir x
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+17.	Try moving x inside a
+		$ mv x  a
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+18.	Create directory movies
+		$mkdir movies
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+19.	Change group of movies to sudo
+		~$ sudo chown amrita movies
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+20.	Change group of movies to avahi
+		Install avahi =>       ~$ sudo apt-get update -y
+			               ~$ sudo apt-get install -y avahi-daemon
+		change the group to avahi =>
+				~$ sudo chown avahi movies
+				 drwxrwxrwx 1 avahi    cdacunix 4096 Sep  9 11:20 movies
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+21.	Try changing permission after changing ownership to root
+22.	Try Changing permission after changing group to sudo without sudo
+23.	Try Changing owner and group both to root
+24.	Try changinging permission
+25.	Try deleting the file

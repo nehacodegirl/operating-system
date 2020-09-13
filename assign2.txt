@@ -1,14 +1,15 @@
+						Assignment-2
+
 1. Write a script to create 10 directories, say a1,a2,...,a10
+	~/assignment2$ vi as1.sh
+		for i in {1..10}
+		do
+    		    mkdir a$i
+		done
+	~/assignment2$ ./as1.sh
+	
 Report error if a directory/file exists with the same name.
-
-for((i=1;$i<=10;i++))
-do
-                mkdir a$i;
-        done
-
--	./assig2.sh
--	Chmod 777 assig2.sh
-
+===============================================================================================================================
 
 2. Write a menu based script to perform following string operations
 a) To find length of a string
@@ -16,174 +17,297 @@ c) Copying string
 d) Concatenation of strings
 e) Compare two strings
 f) Reversing a string
-ANS - 
 
-echo "enter string"
-
-while(true)
-do
-        echo '1.Find length'
-        echo '2.copying string'
-        echo '3.concate of string'
-        echo '4.compare to string'
-        echo '5.reverse string'
+	~/assignment2$ vi as2.sh
+		echo "Enter Two String"
 read str1
-read option
-case $option in
-        1)echo ${#str1};;
+read str2
 
-        2) str2=$str1
-                echo $str2;;
-
-        3)str3="Rambhad"
-
-                echo $str1$str3;;
-        4)str3="Rambhad"
-                if [ $str1 == $str3 ];
+echo "Enter the choice :"
+echo "1 : Find String Length"
+echo "2 : Copying String "
+echo "3 : Concanate of String"
+echo "4 : compair two String"
+echo "5 : Reverse a string"
+read choice
+case $choice in
+        1)res=`echo Length of string is : ${#str1}`;;
+        2)res=`echo Copy str1 to str2 : ${str1}${str2}`;;
+        3)res=`echo Concanate of string: $str1$str2`;;
+        4)
+                if [ $str1 = $str2 ]
                 then
-                        echo "equal"
+                        res=`echo Both String are Same`;
                 else
-                        echo "unequal"
-                        fi
+                        res=`echo Both String are not Same`;
+                fi
+                ;;
+
+        5)
+                for((i = ${#str1}-1; i >= 0; i--))
+                do
+                        reverse="$reverse${str1:$i:1}"
+                done
+                        res=`echo $reverse`
                         ;;
+esac
+echo "Result : $res"
 
-                5)echo $str1 | rev;;
+		~/assignment2$ ./as2.sh
 
-        *)exit;;
-        esac
-done
+===============================================================================================================================
 
-3.Write a shell script to rename all files in the current directory with numeric continuous value(Warning: Do this in a personal folder. Don't use Home directory) 
--mkdir q3
--cd q3
--touch a1.txt a2.txt a3.txt a4.txt a5.txt
-for((i=1;$i<=5;i++))
-do
-        mv a$i.txt b$i.txt;
-done
+3. Write a shell script to rename all files in the current directory with numeric continuous value(Warning: Do this in a personal folder. Don't use           Home directory)
+create file =>
+	$ vi as1createfile.sh
+		for i in {1..10}
+		 do
+        		cat >file$i.txt
+		done
+	$ ./as1createfile.sh
+	
+Rename file =>
+	$ vi as1renamefile.sh
+		for i in {1..10}
+		do
+       		mv file$i.txt  $i.txt
+		done
+ 	$ ./as1renamefile.sh
+
+===============================================================================================================================
+
 4. Write a script that print environment variable(Print $HOME,$PATH,$SHELL,$HISTORY,$LOGNAME,$TERM)
+	$ vi environmentVariable.sh
+		echo "Environment Variable : "
+		echo "$HOME"
+		echo "$PATH"
+		echo "$SHELL"
+		echo "$HISTORY"
+		echo "$LOGNAME"
+		echo "$TERM"
+	./environmentVariable.sh
+		Environment Variable :
+		/home/cdacunix
+		/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+		/bin/bash
+		
+		cdacunix
+		xterm-256color
 
-echo $HOME
-echo $PATH
-echo $SHELL
-echo $HISTORY
-echo $LOGNAME
-echo $TERM
-
+===============================================================================================================================
 
 5. Write a shell script to print all files permissions in current directory(Not name or other details)(Use cut commands)
+		$ vi filepermission.sh
+			ls -l
+		$ ./filepermission.sh | cut -d" " -f1
+			total
+			-rwxrwxrwx
+			-rwxrwxrwx
+			-rwxrwxrwx
+			-rwxrwxrwx
+			-rwxrwxrwx
+			-rwxrwxrwx
+			-rwxrwxrwx
+			-rwxrwxrwx
+			-rwxrwxrwx
+			-rwxrwxrwx
+			-rwxrwxrwx
+			-rwxrwxrwx
+			-rwxrwxrwx
+			-rwxrwxrwx
 
-
+===============================================================================================================================
 
 6. Write a shell script to print all files permissions and name of file
+		$ ./filepermission.sh | cut -d' ' -f1,12
+total
+-rwxrwxrwx 1.txt
+-rwxrwxrwx 10.txt
+-rwxrwxrwx 2.txt
+-rwxrwxrwx 3.txt
+-rwxrwxrwx 4.txt
+-rwxrwxrwx 5.txt
+-rwxrwxrwx 6.txt
+-rwxrwxrwx 7.txt
+-rwxrwxrwx 8.txt
+-rwxrwxrwx 9.txt
+-rwxrwxrwx
+-rwxrwxrwx
+-rwxrwxrwx
+-rwxrwxrwx filepermission.sh
 
 7.Write a shell script to print all files name and size greater than 5K
 
+===============================================================================================================================
 
-1.	Write a script To check given year is leap or not.
-Ans –
-echo "Enter the year"
+1. Write a script To check given year is leap or not.
+	~/assignment2$ vi leapyear.sh
+echo "enter the year"
 read year
-if [ $((year % 4)) -eq 0 ]
-then
-        echo $year "is leap year";
 
-else
-        echo $year "is not a leap year";
+ if [ `expr $year % 400` -eq 0 ];
+ then
+        echo "$year is a Leap year"
 
-fi
+ elif [ `expr $year % 100` -eq 0 ];
+ then
+         echo "$year is not Leap year"
 
+ elif [ `expr $year % 4` -eq 0 ];
+ then
+         echo "$year is not Leap year"
 
+ else
+        echo "$year is not a leap year"
+
+ fi
+	~/assignment2$ ./leapyear.sh
+===============================================================================================================================
 
 2. Write a script to print day of the week using
 	a) elif	b) case 
-ans 1 –b)case
-echo "Enter a number"
-read n
-case $n in
-        1) echo "Sunday" ;;
-        2) echo "Monday" ;;
-        3) echo "Tuesday" ;;
-        4) echo "Wednesday" ;;
-        5) echo "Thursday" ;;
-        6) echo "Friday" ;;
-        7) echo "Saturday" ;;
-        *) echo "Enter value between 1 to 7" ;;
-Esac
+case => 
+echo "Enter the number(between 1 to 7 )"
+read number
+case $number in
+        1) echo "Monday";;
+        2) echo "Tuesday";;
+        3) echo "Wednesday";;
+        4) echo "Thusday";;
+        5) echo "Friday";;
+        6) echo "Saturday";;
+        7) echo "Sunday";;
+        *) echo "Enter value between 1 to 7";;
+esac
 
-Ans 2 -a)elif
-
-echo "enter a number"
-read n
-if [ $n == 1 ];
+elif =>
+echo "Enter the number(between 1 to 7)"
+read number
+if [ $number -eq 1 ];
 then
-        echo "Sunday";
-
-elif [ $n == 2 ];
+        echo "Today is Monday"
+elif [ $number -eq 2 ];
 then
-        echo "Monday";
-elif [ $n == 3 ];
+        echo "Today is Tuesday"
+elif [ $number -eq 3 ];
 then
-        echo "Tuesday";
-elif [ $n == 4 ];
+        echo "Today is Wednesday"
+elif [ $number -eq 4 ];
 then
-        echo "Wednesday";
-elif [ $n == 5 ];
+        echo "Today is Thusday"
+elif [ $number -eq 5 ];
 then
-        echo "Thursday";
-elif [ $n == 6 ];
+        echo "Today is Friday"
+elif [ $number -eq 6 ];
 then
-        echo "Friday";
-
-elif [ $n == 7 ];
+        echo "Today is Saturday"
+elif [ $number -eq 7 ];
 then
-        echo "Saturday";
+        echo "Today is Sunday"
 else
-        echo "Enter number between 1 to 7";
+        echo "Enter number between 1 to 7"
 fi
 
+===============================================================================================================================
 
 3. a) Write a script to find biggest of three no.s
-   b) To find avg of 3 no.s, read no.s from keyboard
-ans a)
+	~/assignment2$ vi greaternumber.sh
 
-echo "Enter three no"
-read n1
-read n2
-read n3
-if [ $n1 -gt $n2 ] && [ $n1 -gt $n3 ]
+echo "Enter three integer Number : "
+read a
+read b
+read c
+if [ $a -gt $b ];
 then
-        echo $n1 "is biggest number";
-elif [ $n2 -gt $n1 ] && [ $n2 -gt $n3 ]
+        if [ $a -gt $c ];
+        then
+             echo "$a is greatest "
+        else
+                echo "$c is greatest "
+        fi
+elif [ $b -gt $c ];
 then
-        echo $n2 "is biggest number";
+       echo "$b is greatest"
 else
-        echo $n3 "is biggest number";
+        echo "$c is greatest"
 fi
-ans b)
-echo "Enter 3 number"
-read n1
-read n2
-read n3
-sum=$((n1 + n2 + n3))
-avg=$(echo $sum / 3 | bc -l)
-echo $avg
+
+	~/assignment2$ ./greaternumber.sh
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+b) To find avg of 3 no.s, read no.s from keyboard
+	~/assignment2$ vi average.sh
+echo "Enter the three Number"
+read a1
+read a2
+read a3
+sum=` expr $a1 + $a2 + $a3 `
+avg=` expr $sum / 3 `
+echo "Average of Three Numbers: $avg"
+	~/assignment2$ ./average.sh
+
+===============================================================================================================================
 
 4. Write a program to check wahether given no.is even or odd
-
-Ans –
-echo "enter a number"
-read n
-if [ $((n%2)) -eq 0 ]
+	$vi evenodd.sh
+echo "Enter the Number :"
+read a
+if [ ` expr $a % 2 ` -eq 0  ];
 then
-        echo $n "is a even number"
+        echo "Number is Even"
 else
-        echo $n "is a odd number"
+        echo "Number is Odd"
 fi
+ 	$ ./evenodd.sh
 
+===============================================================================================================================
 
 5. Write a program to print calendar of current month in next year,previous years.
 	For eg:-sep 2014,sep 2012 if current month is sep 2013	
+
+		~/assignment2$ vi calender.sh
+
+echo "Enter current year "
+read year
+echo "Enter current month"
+read month
+
+pre=` expr $year - 1 `
+next=` expr $year + 1 `
+
+        cal $pre  -m$month
+        cal $year  -m$month
+        cal $next  -m$month
+
+		~/assignment2$ ./calender.sh
+
+Enter current year
+2020
+Enter current month
+9
+   September 2019
+Su Mo Tu We Th Fr Sa
+ 1  2  3  4  5  6  7
+ 8  9 10 11 12 13 14
+15 16 17 18 19 20 21
+22 23 24 25 26 27 28
+29 30
+
+   September 2020
+Su Mo Tu We Th Fr Sa
+       1  2  3  4  5
+ 6  7  8  9 10 11 12
+13 14 15 16 17 18 19
+20 21 22 23 24 25 26
+27 28 29 30
+
+   September 2021
+Su Mo Tu We Th Fr Sa
+          1  2  3  4
+ 5  6  7  8  9 10 11
+12 13 14 15 16 17 18
+19 20 21 22 23 24 25
+26 27 28 29 30
 
 
 6. Write a program to find sum and product of two no.s using 
@@ -191,55 +315,162 @@ fi
 	b)expr
 	c)bc	
 
-Ans b)expr
-echo "Enter two no"
-read n1
-read n2
-ans=`expr $n1 \* $n2`
-echo "Product of two number is "$ans
-ans2=`expr $n1 \+ $n2`
-echo "Sum of two number is "$ans2
+	~/assignment2$ vi sumproduct.sh
 
-c) bc
-echo "Enter two no"
-read n1
-read n2
-ans=$(echo "$n1 * $n2" |bc)
-echo "Product of two number is "$ans
-ans2=$(echo "$n1 + $n2" |bc)
-echo "Sum of two number is "$ans2
+echo "Enter the Two no"
+read a
+read b
+echo "Choice here  "
+echo "let1"
+echo "expr1"
+echo "bc1"
+echo "Enter the choice :"
+read str1
+case $str1 in
+        "let1") let "sum=$a + $b";
+                echo $sum
+                let "mul=$a * $b";
+                echo $mul
+                ;;
 
+        "expr1")echo "Sum of Number : `expr $a + $b`"
+                echo "Product of Number : `expr $a \* $b`"
+                ;;
 
+        "bc1")x=`echo "$a + $b" | bc`
+                echo "Sum of Number : $x"
+
+              y=`echo "$a * $b" | bc`
+                echo "product of Number : $y"
+        ;;
+
+          *) echo "Enter the choice between (let1,expr1,bc1)"
+                ;;
+esac
+
+	~/assignment2$ ./sumproduct.sh
+
+===============================================================================================================================
 
 7. Write a script to generate Fibonacci series.
-echo "Enter a number"
-read n
-a=0
-b=1
-echo "The Fibonacci series is "
-for (( i=0; i<n; i++ ))
+		~/assignment2$ vi fabonicc.sh
+
+echo -n "Enter the number of terms of series : "
+read term
+s1=0
+s2=1
+
+ echo "Fibonacci Series : "
+
+ for((i=0; i<$term ;i++))
+         do
+                 echo "  $s1"
+                 sum=$(($s1+$s2))
+                 s1=$s2
+                 s2=$sum
+         done
+		~/assignment2$ ./fabonicc.sh
+
+===============================================================================================================================
+
+8. Write a shell script to reverse the single strings.
+	~/assignment2$ vi reversestring.sh
+
+echo -n "Enter the String :"
+read str
+len=${#str}
+echo $len
+for ((i=$len-1 ; i>=0 ; i--))
 do
-        echo -n "$a "
-        fn=$((a + b))
-        a=$b
-        b=$fn
+        reverse="$reverse${str:$i:1}"
 done
+echo "$reverse"
 
-
-8. Write a shell script to reverse the single strings. 
-Ans - 
-echo "Enter a string"
-read string
-len=${#string}
-for ((i = $len - 1; i >= 0; i--))
-do
-        reverse=$(echo "${string:$i:1}")
-        echo $reverse
-done
-
+	~/assignment2$ ./reversestring.sh 
 9.Write a shell script to reverse the list of strings and reverse each string further in the list.
+	~/assignment2$ vi reverse_strings_sequence.sh
+
+echo -n "How many string you want to enter :"
+read n
+declare -a str
+
+echo "strings are : "
+        i=0
+        while [[ $i -le $n ]]
+        do
+            read str[$i]
+            i=` expr $i + 1 `
+        done
+            min=0
+            max=$(( ${#str[@]} -1 ))
+
+            len=$max
+
+echo "Reverse sequence of strings and Reverse each string"
+        while [[ $min -lt $max ]]
+        do
+                x="${str[ $min ]}"
+                str[ $min ]="${str[ $max ]}"
+                str[ $max ]="$x"
+
+                min=` expr $min + 1 `
+                max=` expr $max - 1 `
+
+        done
+
+        max=$len
+        for (( k=0;k<=$max;k++ ))
+        do
+                rev=""
+                onestring=${str[$k]}
+                l=$((${#onestring} - 1))
+
+                for (( j=$l;j>=0;j-- ))
+                do
+                  rev="$rev${onestring:$j:1}"
+                done
+                str[$k]=$rev
+
+        done
+
+        echo "${str[@]}"
+
+
+	~/assignment2$ ./reverse_strings_sequence.sh
+===============================================================================================================================
 
 10. Write a shell script to print the reverse of an input number.
+~/assignment2$ vi reverse_numbers_sequence.sh
+
+echo -n "How may Number you want to enter :"
+
+read n
+declare -a arr
+for (( i=0;i<=$n;i++ ))
+do
+        read arr[$i]
+done
+
+echo "Reverse list of Numbers :"
+min=0
+max="$(( ${#arr[@]}))"
+while [[ $min -lt $max ]]
+do
+        x="${arr[$min]}"
+        arr[$min]="${arr[$max]}"
+        arr[$max]="$x"
+        min=` expr $min + 1 `
+        max=` expr $max - 1 `
+done
+    echo "${arr[@]}"
+
+~/assignment2$ ./reverse_numbers_sequence.sh
 
 
-
+===============================================================================================================================
+							
+1.Write a shell script to validate password strength. Here are a few assumptions for the password string.
+Length  – minimum of 8 characters.
+Contain both alphabet and number.
+Include both the small and capital case letters.
+If the password doesn’t comply with any of the above conditions, then the script should report it as a <Weak Password>.

@@ -268,8 +268,8 @@ Q2.	A) Create three directory a b and c and create a.txt,b.txt and c.txt
 	$ mv b c
 	
 	C)Create alias of ls -lh command to your name.
-	  $alias amrita='ls -lh'
-	  $ amrita
+	  $alias neha='ls -lh'
+	  $ neha
 	
 	D)Change Directory name a to cdac.
 	$ mv c cdac
@@ -325,16 +325,16 @@ Q4. Create a file with some content using vi editor
 
 a) Display the file using cat command
 	$ cat file4using_vi
-	hello linux vi editor , I am amrita tiwari.
+	hello linux vi editor , I am neha rambhad.
 
 b) Display line numbers along with content
 	$ cat -n file4using_vi
-     		 1  hello linux vi editor , I am amrita tiwari.
+     		 1  hello linux vi editor , I am neha rambhad.
     		 2  Cat Command Display Line Numbers.
 c) Display the file in reverse order using tac
 	$ tac file4using_vi
 		Cat Command Display Line Numbers.
-		hello linux vi editor , I am amrita tiwari.
+		hello linux vi editor , I am neha rambhad.
 d) Combine multiple files using cat command
 	cat file1.txt file2.txt file3.txt file4.txt > file5.txt
 	$ cat file5.txt
@@ -455,7 +455,7 @@ Q1. Create directory of your name and then create 4 files inside it named
         a.txt, b.txt, c.txt and d.sh. And change the directory permission to
 	only user and also files permission to only user such that
 		
-			~/amrita$ chmod 700 *
+			~/neha $ chmod 700 *
 -rwx------ 1 cdacunix cdacunix 0 Sep  9 00:19 a.txt
 -rwx------ 1 cdacunix cdacunix 0 Sep  9 00:19 b.txt
 -rwx------ 1 cdacunix cdacunix 0 Sep  9 00:20 c.txt
@@ -463,14 +463,14 @@ Q1. Create directory of your name and then create 4 files inside it named
 
 
 a)user can read and write the file a.txt and b.txt
-		~/amrita$ chmod 600 a.txt b.txt
+		~/neha$ chmod 600 a.txt b.txt
 -rw------- 1 cdacunix cdacunix 0 Sep  9 00:19 a.txt
 -rw------- 1 cdacunix cdacunix 0 Sep  9 00:19 b.txt
 -rwx------ 1 cdacunix cdacunix 0 Sep  9 00:20 c.txt
 -rwx------ 1 cdacunix cdacunix 0 Sep  9 00:20 d.sh
 					
 b)user can write the file c.txt
-		~/amrita$ chmod 200 c.txt
+		~/neha$ chmod 200 c.txt
 -rw------- 1 cdacunix cdacunix 0 Sep  9 00:19 a.txt
 -rw------- 1 cdacunix cdacunix 0 Sep  9 00:19 b.txt
 --w------- 1 cdacunix cdacunix 0 Sep  9 00:20 c.txt
@@ -480,7 +480,7 @@ c)user can exectuable the file d.sh. Make
 		Contents of file d.sh:
 			#/bin/sh
 			ls -lh
-		~/amrita$ chmod 100 d.sh
+		~/neha$ chmod 100 d.sh
 $ ls -l
 -rw------- 1 cdacunix cdacunix  0 Sep  9 00:19 a.txt
 -rw------- 1 cdacunix cdacunix  0 Sep  9 00:19 b.txt
@@ -490,8 +490,8 @@ $ ls -l
 Q2. Change the permission of the previous directory to executable only.
 	Analyze the output.
 
-		~/amrita$ chmod 111 *
-cdacunix@DESKTOP-T3JUF59:~/amrita$ ls -l
+		~/neha$ chmod 111 *
+cdacunix@DESKTOP-T3JUF59:~/neha$ ls -l
 ---x--x--x 1 cdacunix cdacunix  0 Sep  9 00:19 a.txt
 ---x--x--x 1 cdacunix cdacunix  0 Sep  9 00:19 b.txt
 ---x--x--x 1 cdacunix cdacunix  0 Sep  9 00:20 c.txt
@@ -499,19 +499,19 @@ cdacunix@DESKTOP-T3JUF59:~/amrita$ ls -l
 
 Q3. Change the permission of the previous directory to read only.
 	Analyze the output.
-		:~/amrita$ chmod 444 *
-cdacunix@DESKTOP-T3JUF59:~/amrita$ ls -l
+		:~/neha$ chmod 444 *
+cdacunix@DESKTOP-T3JUF59:~/neha$ ls -l
 -r--r--r-- 1 cdacunix cdacunix  0 Sep  9 00:19 a.txt
 -r--r--r-- 1 cdacunix cdacunix  0 Sep  9 00:19 b.txt
 -r--r--r-- 1 cdacunix cdacunix  0 Sep  9 00:20 c.txt
 -r--r--r-- 1 cdacunix cdacunix 42 Sep  9 01:14 d.sh
 
 Q4. Use echo to list the all files of your home directory.
-	~/amrita$ echo *
+	~/neha$ echo *
 Q5. Use echo to list the all files of /etc/ directory
 Q6. Use echo to list the all files of /etc/ directory with extension name .conf
 Q7. Use echo to append your name to a.txt
-	$ echo 'amrita'>>a.txt
+	$ echo 'neha'>>a.txt
 	$ cat>>a.txt
 	a
 
@@ -648,7 +648,7 @@ d)Copy file inside a into b
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 19.	Change group of movies to sudo
-		~$ sudo chown amrita movies
+		~$ sudo chown neha movies
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
